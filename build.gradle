@@ -1,0 +1,42 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+plugins {
+	id "com.moowork.node" version "1.2.0"
+	id 'java'
+	id 'eclipse-wtp'
+	id "org.springframework.boot" version "${springBootVersion}"
+	id "io.spring.dependency-management" version "${springBootVersion}"
+	id 'war'
+}
+
+group = 'com.szymkowski'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	providedRuntime
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	runtime('org.springframework.boot:spring-boot-devtools')
+	compileOnly('org.projectlombok:lombok')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
