@@ -17,10 +17,8 @@
 *.iml
 *.ipr
 
-/gradle
-gradlew.bat
-/gradlew
 
+/.gradle
 /**/node_modules
 /src/main/resources/static
 /out/

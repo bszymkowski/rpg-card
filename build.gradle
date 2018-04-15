@@ -1,7 +1,4 @@
 buildscript {
-	ext {
-		springBootVersion = '2.0.1.RELEASE'
-	}
 	repositories {
 		mavenCentral()
 	}
@@ -14,8 +11,8 @@ plugins {
 	id "com.moowork.node" version "1.2.0"
 	id 'java'
 	id 'eclipse-wtp'
-	id "org.springframework.boot" version "${springBootVersion}"
-	id "io.spring.dependency-management" version "${springBootVersion}"
+	id "org.springframework.boot" version "2.0.1.RELEASE"
+	id "io.spring.dependency-management" version "2.0.1.RELEASE"
 	id 'war'
 }
 
