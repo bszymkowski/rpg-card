@@ -26,10 +26,10 @@ configurations {
 }
 
 task stage() {
-	dependsOn clean, war
+	dependsOn clean, bootWar
 }
 
-war.mustRunAfter clean
+bootWar.mustRunAfter clean
 
 task copyToLib(type: Copy) {
 	into "$buildDir/server"
