@@ -26,7 +26,7 @@ configurations {
 }
 
 task stage() {
-	dependsOn clean, bootWar
+	dependsOn clean, war
 }
 
 war.mustRunAfter clean
