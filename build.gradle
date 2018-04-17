@@ -25,25 +25,19 @@ configurations {
 	providedRuntime
 }
 
-
 task buildFrontend(type: NodeTask) {
 	script = file('frontend/scripts/build.js')
 }
+apply from: 'gradle/heroku.gradle'
 
-task stage() {
-	dependsOn clean, buildFrontend, bootWar
-}
+bootWar.dependsOn buildFrontend
+bootWar.mustRunAfter clean
 
-bootWar.mustRunAfter clean, buildFrontend
-
-task copyToLib(type: Copy) {
-	into "$buildDir/server"
-	from(configurations.compile) {
-		include "webapp-runner*"
+bootWar {
+	from('build/resources/webapp') {
+		include '/**/*.*'
 	}
 }
-
-stage.dependsOn(copyToLib)
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')

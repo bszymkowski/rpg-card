@@ -1,0 +1,13 @@
+task stage() {
+    dependsOn clean, bootWar
+}
+
+
+task copyToLib(type: Copy) {
+    into "$buildDir/server"
+    from(configurations.compile) {
+        include "webapp-runner*"
+    }
+}
+
+stage.dependsOn(copyToLib)
