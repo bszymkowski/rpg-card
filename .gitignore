@@ -18,6 +18,7 @@
 *.ipr
 
 
+/src/main/webapp/**/*.*
 /.gradle
 /**/node_modules
 /src/main/resources/static
