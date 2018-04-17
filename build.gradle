@@ -25,10 +25,28 @@ configurations {
 	providedRuntime
 }
 
+task serveFrontend(type: NodeTask) {
+	script = file('frontend/scripts/start.js')
+}
+
 task buildFrontend(type: NodeTask) {
 	script = file('frontend/scripts/build.js')
 }
-apply from: 'gradle/heroku.gradle'
+
+task stage() {
+	dependsOn clean, bootWar
+}
+
+
+task copyToLib(type: Copy) {
+	into "$buildDir/server"
+	from(configurations.compile) {
+		include "webapp-runner*"
+	}
+}
+
+stage.dependsOn(copyToLib)
+
 
 bootWar.dependsOn buildFrontend
 bootWar.mustRunAfter clean
