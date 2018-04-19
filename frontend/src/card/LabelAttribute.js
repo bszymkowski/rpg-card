@@ -1,19 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Input, Container, Row, Col} from 'reactstrap'
+import PropTypes from 'prop-types';
 
-function LabelAttribute(props) {
-    return (
-        <Container>
-            <Row>
-                <Col xl={{size: 4}} lg={{size: 4}}>
-                    <strong>{props.label}: </strong>
-                </Col>
-                <Col xl={{size: 8}} lg={{size: 8}}>
-                    <Input type="textArea" value={props.value} onChange={(e) => {props.onChange(e.target.value)}}/>
-                </Col>
-            </Row>
-        </Container>
-    )
-}
+const LabelAttribute = ({label, value, valueChange}) => (
+    <Container>
+        <Row>
+            <Col xl={{size: 4}} lg={{size: 4}}>
+                <strong>{label}: </strong>
+            </Col>
+            <Col xl={{size: 8}} lg={{size: 8}}>
+                <Input type="textArea"
+                       value={value}
+                       onChange={(e) => {
+                           valueChange(e.target.value)
+                       }}/>
+            </Col>
+        </Row>
+    </Container>
+);
+
+LabelAttribute.propTypes = {
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string,
+    valueChange: PropTypes.func.isRequired
+};
+
 
 export default LabelAttribute;
