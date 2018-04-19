@@ -9,9 +9,9 @@ export default class CharacterSheet extends Component {
 
     constructor() {
         super();
-        this.store = createStore(combineReducers(characterSheet));
+        this.store = createStore(combineReducers({characterSheet}));
         this.store.subscribe( () => {
-            this.setState(this.store.getState());
+            this.setState(this.store.getState().characterSheet);
         })
     }
 
