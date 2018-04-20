@@ -17,7 +17,6 @@ class CharacterSheet extends Component {
     componentWillMount() {
         this.props.loadCharacterSheet();
     }
-// const CharacterSheet = ({characterSheet, onChangeValue}) => {
 
     render () {
 
@@ -27,9 +26,7 @@ class CharacterSheet extends Component {
             </Container>
         );
     }
-
-
-};
+}
 
 CharacterSheet.propTypes = {
     characterSheet: PropTypes.object,

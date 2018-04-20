@@ -1,7 +1,9 @@
+import deepAssign from 'deep-assign'
+
 export const characterSheet = (state = {header: {}}, action) => {
     switch (action.type) {
         case VALUE_CHANGE:
-            return Object.assign({}, state, action.change);
+            return deepAssign({}, state, action.change);
         case LOAD_SHEET:
             return Object.assign({}, state, {isLoading: true});
         case SHEET_RECEIVED:

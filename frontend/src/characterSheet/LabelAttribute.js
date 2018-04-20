@@ -10,7 +10,7 @@ const LabelAttribute = ({label, value, valueChange}) => (
             </Col>
             <Col xl={{size: 8}} lg={{size: 8}}>
                 <Input type="textArea"
-                       value={value}
+                       value={value || ""}
                        onChange={(e) => {
                            valueChange(e.target.value)
                        }}/>
