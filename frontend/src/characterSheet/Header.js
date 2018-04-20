@@ -1,13 +1,20 @@
 import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import LabelAttribute from './LabelAttribute';
-import {strings} from '../strings';
+import {strings} from './strings';
 import PropTypes from 'prop-types';
 
 const labels = strings.header;
 
-const CardHeader = ({header, onChangeValues}) => (
+const Header = ({header, onChangeValues}) => (
     <Container>
+        <Row>
+            <Col>
+                <header className="text-center">
+                    <h1>{labels.title}</h1>
+                </header>
+            </Col>
+        </Row>
         <Row>
             <Col>
                 <LabelAttribute
@@ -95,9 +102,9 @@ const CardHeader = ({header, onChangeValues}) => (
     </Container>
 );
 
-CardHeader.propTypes = {
+Header.propTypes = {
     header: PropTypes.object.isRequired,
     onChangeValues : PropTypes.func.isRequired
 };
 
-export default CardHeader;
+export default Header;
