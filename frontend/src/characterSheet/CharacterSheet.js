@@ -1,23 +1,40 @@
-import {Container} from 'reactstrap';
-import {React} from 'react';
+import { Container } from 'reactstrap';
+import React, {Component} from 'react';
 import Header from "./Header";
 import {actions} from './reducer'
 import {connect} from 'react-redux'
 import {PropTypes} from 'prop-types';
 
-const CharacterSheet = ({characterSheet, onChangeValue}) => {
+class CharacterSheet extends Component {
 
-    return (
-        <Container>
-            <Header header={characterSheet.header} onChangeValues={onChangeValue}/>
-        </Container>
-    );
+    constructor({characterSheet, onChangeValue, loadCharacterSheet}) {
+        super();
+        this.characterSheet = characterSheet;
+        this.onChangeValue = onChangeValue;
+        this.loadCharacterSheet = loadCharacterSheet;
+
+    }
+    componentWillMount() {
+        this.props.loadCharacterSheet();
+    }
+// const CharacterSheet = ({characterSheet, onChangeValue}) => {
+
+    render () {
+
+        return (
+            <Container>
+                <Header header={this.props.characterSheet.header} onChangeValues={this.props.onChangeValue}/>
+            </Container>
+        );
+    }
+
 
 };
 
 CharacterSheet.propTypes = {
     characterSheet: PropTypes.object,
-    onChangeValue: PropTypes.func
+    onChangeValue: PropTypes.func.isRequired,
+    loadCharacterSheet: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -29,6 +46,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onChangeValue: val => {
             dispatch(actions.changeValue(val))
+        },
+        loadCharacterSheet: () => {
+            dispatch(actions.loadCharacterSheet());
         }
     }
 };
