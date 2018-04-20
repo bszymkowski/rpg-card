@@ -1,49 +1,37 @@
-import React, {Component} from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Container} from 'reactstrap';
+import {React} from 'react';
 import Header from "./Header";
 import {actions} from './reducer'
-import {store} from '../config/redux'
+import {connect} from 'react-redux'
+import {PropTypes} from 'prop-types';
 
-export default class CharacterSheet extends Component {
+const CharacterSheet = ({characterSheet, onChangeValue}) => {
 
-    constructor() {
-        super();
-        store.subscribe( () => {
-            this.setState(store.getState().characterSheet);
-        })
+    return (
+        <Container>
+            <Header header={characterSheet.header} onChangeValues={onChangeValue}/>
+        </Container>
+    );
+
+};
+
+CharacterSheet.propTypes = {
+    characterSheet: PropTypes.object,
+    onChangeValue: PropTypes.func
+};
+
+const mapStateToProps = (state) => {
+    const {characterSheet} = state;
+    return {characterSheet};
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onChangeValue: val => {
+            dispatch(actions.changeValue(val))
+        }
     }
+};
 
 
-
-    state = {
-        header: {}
-    };
-
-    onChange = (change) => {
-        store.dispatch({type: actions.VALUE_CHANGE, change})
-    };
-
-
-    componentDidMount() {
-
-
-        fetch('api/character')
-            .then(
-                (ok) => {
-                    return ok.json()
-                }
-            )
-            .then(data => {
-                store.dispatch({type: actions.VALUE_CHANGE, change: data});
-            });
-    }
-
-    render() {
-        return (
-            <Container>
-                <Header header={this.state.header} onChangeValues={this.onChange}/>
-            </Container>
-        );
-    }
-}
-
+export default connect(mapStateToProps, mapDispatchToProps)(CharacterSheet);
