@@ -7,22 +7,17 @@ import {PropTypes} from 'prop-types';
 
 class CharacterSheet extends Component {
 
-    constructor({characterSheet, onChangeValue, loadCharacterSheet}) {
-        super();
-        this.characterSheet = characterSheet;
-        this.onChangeValue = onChangeValue;
-        this.loadCharacterSheet = loadCharacterSheet;
-
-    }
     componentWillMount() {
         this.props.loadCharacterSheet();
     }
 
     render () {
 
+        const {characterSheet, onChangeValue} = this.props;
+
         return (
             <Container>
-                <Header header={this.props.characterSheet.header} onChangeValues={this.props.onChangeValue}/>
+                <Header header={characterSheet.header} onChangeValues={onChangeValue}/>
             </Container>
         );
     }
