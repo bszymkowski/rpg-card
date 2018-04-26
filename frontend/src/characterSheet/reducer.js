@@ -1,4 +1,5 @@
 import deepAssign from 'deep-assign'
+import axios from 'axios';
 
 export const characterSheet = (state = {header: {}}, action) => {
     switch (action.type) {
@@ -33,12 +34,12 @@ export const actions = {
             change: value
         }
     },
-    loadCharacterSheet: () => {
+    loadCharacterSheet: (id) => {
         return function (dispatch) {
             dispatch(loadCharacterSheet());
-            return fetch('/api/character')
+            return axios.get('/api/character', { params : {id: id}})
                 .then(
-                    ok => ok.json(),
+                    ok => ok.data,
                     err => console.log("Error!", err)
                 ).then(json =>
                     dispatch(characterSheetReceived(json))

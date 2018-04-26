@@ -8,8 +8,9 @@ import {PropTypes} from 'prop-types';
 class CharacterSheet extends Component {
 
     componentWillMount() {
-        const {params} = this.props;
-        this.props.loadCharacterSheet();
+        const {characterId} = this.props;
+        console.log(this.props)
+        this.props.loadCharacterSheet(characterId);
     }
 
     render () {
@@ -31,9 +32,9 @@ CharacterSheet.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-    const {params} = ownProps.match;
+    const {characterId} = ownProps.match.params;
     const {characterSheet} = state;
-    return {characterSheet, params};
+    return {characterSheet, characterId};
 };
 
 const mapDispatchToProps = dispatch => {
@@ -41,8 +42,8 @@ const mapDispatchToProps = dispatch => {
         onChangeValue: val => {
             dispatch(actions.changeValue(val))
         },
-        loadCharacterSheet: () => {
-            dispatch(actions.loadCharacterSheet());
+        loadCharacterSheet: (id) => {
+            dispatch(actions.loadCharacterSheet(id));
         }
     }
 };

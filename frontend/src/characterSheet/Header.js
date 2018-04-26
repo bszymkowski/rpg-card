@@ -11,7 +11,7 @@ const Header = ({header, onChangeValues}) => (
         <Row>
             <Col>
                 <header className="text-center">
-                    <h1>{labels.title}</h1>
+                    {/*<h1>{labels.title}</h1>*/}
                 </header>
             </Col>
         </Row>

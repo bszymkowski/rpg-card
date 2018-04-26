@@ -2,18 +2,16 @@ package com.szymkowski.rpg.character;
 
 import com.szymkowski.rpg.character.dto.CharacterDTO;
 import com.szymkowski.rpg.character.dto.HeaderDTO;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "api/character")
+@RequestMapping("/api/character")
 class CharacterResource {
 
     @RequestMapping(
             method = RequestMethod.GET
     )
-    public CharacterDTO getCharacterInfo() {
+    public CharacterDTO getCharacterInfo(@RequestParam Long id) {
         HeaderDTO header = new HeaderDTO(
                 "Stefan Elefan",
                 "Stefano Banano",
