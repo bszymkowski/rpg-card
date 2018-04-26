@@ -8,6 +8,7 @@ import {PropTypes} from 'prop-types';
 class CharacterSheet extends Component {
 
     componentWillMount() {
+        const {params} = this.props;
         this.props.loadCharacterSheet();
     }
 
@@ -29,9 +30,10 @@ CharacterSheet.propTypes = {
     loadCharacterSheet: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+    const {params} = ownProps.match;
     const {characterSheet} = state;
-    return {characterSheet};
+    return {characterSheet, params};
 };
 
 const mapDispatchToProps = dispatch => {

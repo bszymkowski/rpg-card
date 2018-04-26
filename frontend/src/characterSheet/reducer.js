@@ -36,7 +36,7 @@ export const actions = {
     loadCharacterSheet: () => {
         return function (dispatch) {
             dispatch(loadCharacterSheet());
-            return fetch('api/character')
+            return fetch('/api/character')
                 .then(
                     ok => ok.json(),
                     err => console.log("Error!", err)
