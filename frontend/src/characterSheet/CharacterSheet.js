@@ -9,7 +9,6 @@ class CharacterSheet extends Component {
 
     componentWillMount() {
         const {characterId} = this.props;
-        console.log(this.props)
         this.props.loadCharacterSheet(characterId);
     }
 
