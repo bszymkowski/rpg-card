@@ -17,9 +17,9 @@ import static com.szymkowski.rpg.security.SecurityConstants.SECRET;
 import static com.szymkowski.rpg.security.SecurityConstants.TOKEN_PREFIX;
 
 
-public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
+class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
+    JWTAuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);
     }
 

@@ -25,10 +25,9 @@ import java.util.Date;
 import static com.szymkowski.rpg.security.SecurityConstants.*;
 
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
-
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req,

@@ -14,7 +14,7 @@ import static com.szymkowski.rpg.security.SecurityConstants.SIGN_UP_URL;
 
 @EnableWebSecurity
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class WebSecurity extends WebSecurityConfigurerAdapter {
+class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
