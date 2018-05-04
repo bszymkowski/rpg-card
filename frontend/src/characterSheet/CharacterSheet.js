@@ -1,7 +1,7 @@
 import { Container } from 'reactstrap';
 import React, {Component} from 'react';
 import Header from "./Header";
-import {actions} from './reducer'
+import {actions} from './characterReducer'
 import {connect} from 'react-redux'
 import {PropTypes} from 'prop-types';
 

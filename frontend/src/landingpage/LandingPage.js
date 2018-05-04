@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {push} from 'react-router-redux';
 import {connect} from 'react-redux'
 import {PropTypes} from 'prop-types';
+import {loginUser} from "./loginActions";
 
 
 function LandingPage({login}) {
@@ -22,7 +23,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: () => dispatch(push("/sheet/12"))
+        login: () => dispatch(loginUser({username: "admin", password: "password"}))
     }
 };
 

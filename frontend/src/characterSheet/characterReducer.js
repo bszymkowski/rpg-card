@@ -37,7 +37,15 @@ export const actions = {
     loadCharacterSheet: (id) => {
         return function (dispatch) {
             dispatch(loadCharacterSheet());
-            return axios.get('/api/character', { params : {id: id}})
+
+            let config = {
+                params:
+                    {id: id},
+                headers: {
+                    Authorization: localStorage.getItem('id_token')
+                }
+            };
+            return axios.get('/api/character', config)
                 .then(
                     ok => ok.data,
                     err => console.log("Error!", err)
