@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {push} from 'react-router-redux';
+import {socialLogin} from "../config/socialLogin";
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -39,12 +40,13 @@ export function loginUser(creds) {
         // We dispatch requestLogin to kickoff the call to the API
         dispatch(requestLogin(creds));
 
-
-        return axios.post('/api/login', {
-            username: creds.username,
-            password: creds.password
-        })
-
+        return socialLogin('google').login()
+            .then(({authResponse}) => {
+                return authResponse.access_token;
+            }).then(
+                (access_token) =>
+                    axios.post('/api/login', {network: 'google', token: access_token})
+            )
             .then(({status, headers}) => {
                 let user = {};
                 const {authorization} = headers;

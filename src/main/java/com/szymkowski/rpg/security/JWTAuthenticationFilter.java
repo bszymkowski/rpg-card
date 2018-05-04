@@ -3,6 +3,7 @@ package com.szymkowski.rpg.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.szymkowski.rpg.user.ApplicationUser;
+import com.szymkowski.rpg.user.SocialApplicationUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,13 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            ApplicationUser creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), ApplicationUser.class);
+            SocialApplicationUser socialApplicationUser = new ObjectMapper()
+                    .readValue(req.getInputStream(), SocialApplicationUser.class);
+
+            ApplicationUser creds = new ApplicationUser();
+            creds.setUsername("admin");
+            creds.setPassword("password");
+
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             creds.getUsername(),

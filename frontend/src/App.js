@@ -10,8 +10,8 @@ import LandingPage from "./landingpage/LandingPage"
 import {store, history} from "./config/redux";
 import {Provider} from 'react-redux';
 
-
 function App() {
+
     return (
         <Provider store={store}>
             <ConnectedRouter history={history}>
