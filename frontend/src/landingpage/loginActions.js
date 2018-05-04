@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {push} from 'react-router-redux';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -55,9 +56,11 @@ export function loginUser(creds) {
                     return Promise.reject(user);
                 } else {
                     // If login was successful, set the token in local storage
+                    axios.defaults.headers.common['Authorization'] = authorization;
                     localStorage.setItem('id_token', authorization);
                     // Dispatch the success action
-                    dispatch(receiveLogin(user))
+                    dispatch(receiveLogin(user));
+                    dispatch(push("/sheet/12"));
                 }
             }).catch(err => dispatch(loginError(err)))
     }

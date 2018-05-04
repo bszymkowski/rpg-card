@@ -1,5 +1,6 @@
 import {LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS} from "./loginActions";
 
+
 export function auth(state = {
     isFetching: false,
     isAuthenticated: !!localStorage.getItem('id_token')

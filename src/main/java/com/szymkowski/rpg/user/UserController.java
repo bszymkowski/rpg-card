@@ -8,12 +8,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
+
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
+//todo remove this
 class UserController {
     private final ApplicationUserRepository applicationUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @PostConstruct
+    private void afterPropertiesSet() {
+        ApplicationUser user = new ApplicationUser();
+        user.setPassword(bCryptPasswordEncoder.encode("password"));
+        user.setUsername("admin");
+        applicationUserRepository.save(user);
+    }
 
 
     @PostMapping("/sign-up")
