@@ -23,9 +23,8 @@ class WebSecurity extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
-//                        .defaultSuccessUrl("http://localhost:8000/");
-                        .defaultSuccessUrl("/api/character?id=12")
-//                .and()
+                        //todo redirect
+                        .defaultSuccessUrl("http://localhost:8000/")
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()));

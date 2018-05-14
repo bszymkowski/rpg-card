@@ -34,6 +34,7 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
+            //todo sth wicked here
             SocialApplicationUser socialApplicationUser = new ObjectMapper()
                     .readValue(req.getInputStream(), SocialApplicationUser.class);
 
