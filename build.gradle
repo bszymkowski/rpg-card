@@ -74,4 +74,5 @@ dependencies {
 
 	compile 'org.springframework.security:spring-security-oauth2-client'
 	compile 'org.springframework.security:spring-security-oauth2-jose'
+
 }

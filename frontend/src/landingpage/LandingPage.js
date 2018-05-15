@@ -9,12 +9,14 @@ function LandingPage({login}) {
 
     return (
         <div>
-            <button onClick={login}>Batą</button>
+            <a href="http://localhost:8080/api/oauth2/authorization/google">
+                <button>Batą</button>
+            </a>
         </div>)
 }
 
-LandingPage.propTypes ={
-  login: PropTypes.func.isRequired
+LandingPage.propTypes = {
+    login: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
