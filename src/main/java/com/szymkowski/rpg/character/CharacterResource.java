@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/character")
 class CharacterResource {
@@ -24,6 +26,12 @@ class CharacterResource {
                 "Rolnik",
                 "Ochronka");
         return new CharacterDTO(header);
-
     }
+
+    @GetMapping("/user6")
+    public Principal user(Principal principal) {
+        return principal;
+    }
+
+
 }
