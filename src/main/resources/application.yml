@@ -9,7 +9,7 @@ server:
 
 
 oauth2:
-  redirect_uri: "/api/character/user"
+  redirect_uri: "http://localhost:8000/"
   google:
     client:
       clientId: 162144903306-oi3udlmnst530mk7o9djc2rfp4ippvuc.apps.googleusercontent.com

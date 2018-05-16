@@ -28,10 +28,5 @@ class CharacterResource {
         return new CharacterDTO(header);
     }
 
-    @GetMapping("/user")
-    public Object user(Authentication authentication) {
-        return authentication.getPrincipal();
-    }
-
 
 }
