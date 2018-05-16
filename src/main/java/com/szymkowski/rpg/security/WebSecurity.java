@@ -35,10 +35,9 @@ import java.util.Map;
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 class WebSecurity extends WebSecurityConfigurerAdapter {
 
-//    private final UserDetailsService userDetailsService;
-//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
     private final OAuth2ClientContext oauth2ClientContext;
+    private final GooglePrincipalExtractor googlePrincipalExtractor;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -51,15 +50,7 @@ class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and().logout().permitAll()
                 .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and().addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);;
-//                .csrf().disable().authorizeRequests()
-//                .anyRequest().authenticated();
-//
-//                .and()
-//                .oauth2Login()
-//                        //todo redirect
-//                        .defaultSuccessUrl("http://localhost:8000/sheet/12");
-
+                .and().addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
     }
 
     @Bean
@@ -83,25 +74,16 @@ class WebSecurity extends WebSecurityConfigurerAdapter {
         return registration;
     }
 
+
     private Filter ssoFilter() {
         OAuth2ClientAuthenticationProcessingFilter googlefilter = new OAuth2ClientAuthenticationProcessingFilter("/login/google");
         OAuth2RestTemplate googleTemplate = new OAuth2RestTemplate(google(), oauth2ClientContext);
         googlefilter.setRestTemplate(googleTemplate);
         UserInfoTokenServices tokenServices = new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId());
         tokenServices.setRestTemplate(googleTemplate);
-//        tokenServices.setPrincipalExtractor(new PrincipalExtractor() {
-//            @Override
-//            public Object extractPrincipal(Map<String, Object> map) {
-//                return "User";
-//            }
-//        });
+        tokenServices.setPrincipalExtractor(googlePrincipalExtractor);
         googlefilter.setTokenServices(tokenServices);
-        googlefilter.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
-            @Override
-            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                response.sendRedirect("http://localhost:8000/sheet/12");
-            }
-        });
+        googlefilter.setAuthenticationSuccessHandler(oAuth2AuthenticationSuccessHandler);
         return googlefilter;
     }
 

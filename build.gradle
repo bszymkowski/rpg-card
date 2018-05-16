@@ -74,8 +74,5 @@ dependencies {
 
 
 	compile 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.1.RELEASE'
-
-//	compile 'org.springframework.security:spring-security-oauth2-client'
-//	compile 'org.springframework.security:spring-security-oauth2-jose'
-
+	compile 'com.github.spring-social:spring-social-google:latest.release'
 }
