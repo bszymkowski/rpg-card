@@ -2,30 +2,43 @@ import React, {Component} from 'react';
 import {push} from 'react-router-redux';
 import {connect} from 'react-redux'
 import {PropTypes} from 'prop-types';
-import {loginUser} from "./loginActions";
+import {getLoggedInState} from "./loginActions";
+import LoginView from "./LoginView";
+
+class LandingPage extends React.Component{
+
+    componentWillMount() {
+        const {checkLogin} = this.props;
+        checkLogin();
+    }
+
+    render() {
+        const {isAuthenticated} = this.props;
+        console.log(isAuthenticated);
+        return (
+            <div>
+                {!isAuthenticated ?
+                <LoginView/> : "OHAI"}
+            </div>)
+    }
 
 
-function LandingPage({login}) {
-
-    return (
-        <div>
-            <a href="http://localhost:8080/api/oauth2/authorization/google">
-                <button>Batą</button>
-            </a>
-        </div>)
 }
 
 LandingPage.propTypes = {
-    login: PropTypes.func.isRequired
+    checkLogin: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
-    return {};
+    const isAuthenticated = state.auth.isAuthenticated;
+    return {isAuthenticated};
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: () => dispatch(loginUser({username: "admin", password: "password"}))
+        checkLogin: () => {
+            dispatch(getLoggedInState())
+        }
     }
 };
 

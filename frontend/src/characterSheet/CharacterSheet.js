@@ -13,7 +13,6 @@ class CharacterSheet extends Component {
     }
 
     render () {
-
         const {characterSheet, onChangeValue} = this.props;
 
         return (

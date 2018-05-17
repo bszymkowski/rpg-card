@@ -1,69 +1,25 @@
 import axios from 'axios';
-import {push} from 'react-router-redux';
-import {socialLogin} from "../config/socialLogin";
+import {api} from './../config/api'
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-
-function requestLogin(creds) {
-    return {
-        type: LOGIN_REQUEST,
-        isFetching: true,
-        isAuthenticated: false,
-        creds
-    }
-}
-
-function receiveLogin(user) {
-    return {
-        type: LOGIN_SUCCESS,
-        isFetching: false,
-        isAuthenticated: true,
-        id_token: user.id_token
-    }
-}
-
-function loginError(message) {
-    return {
-        type: LOGIN_FAILURE,
-        isFetching: false,
-        isAuthenticated: false,
-        message
-    }
-}
+export const LOGGED_IN_REQUEST = 'LOGGED_IN_REQUEST';
+export const LOGIN_INFO_RECEIVED = "LOGIN_INFO_RECEIVED";
 
 
-export function loginUser(creds) {
+export const getLoggedInState = () => dispatch => {
 
-    return dispatch => {
-        // We dispatch requestLogin to kickoff the call to the API
-        dispatch(requestLogin(creds));
+    dispatch({type: LOGGED_IN_REQUEST});
 
-        return socialLogin('google').login()
-            .then(({authResponse}) => {
-                return authResponse.access_token;
-            }).then(
-                (access_token) =>
-                    axios.post('/api/login', {network: 'google', token: access_token})
-            )
-            .then(({status, headers}) => {
-                let user = {};
-                const {authorization} = headers;
-                user.id_token = authorization;
-                if (status !== 200) {
-                    // If there was a problem, we want to
-                    // dispatch the error condition
-                    dispatch(loginError(user));
-                    return Promise.reject(user);
-                } else {
-                    // If login was successful, set the token in local storage
-                    axios.defaults.headers.common['Authorization'] = authorization;
-                    localStorage.setItem('id_token', authorization);
-                    // Dispatch the success action
-                    dispatch(receiveLogin(user));
-                    dispatch(push("/sheet/12"));
-                }
-            }).catch(err => dispatch(loginError(err)))
-    }
-}
+    axios.get(api.user).then(response => response.data)
+        .then(user =>
+            dispatch({
+                type: LOGIN_INFO_RECEIVED,
+                isAuthenticated: true,
+                user
+            })
+        ).catch(
+        dispatch({
+            type: LOGIN_INFO_RECEIVED,
+            isAuthenticated: false
+        })
+    )
+};
