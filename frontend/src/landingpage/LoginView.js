@@ -12,7 +12,7 @@ export default function LoginView() {
         <div>
             <a href={api.login.google}>
                 <img src={googleNormal}
-                     alt={strings.google}
+                     alt={login.with.google}
                      onFocus={e => e.currentTarget.src = googleFocus}
                      onClickCapture={e => e.currentTarget.src = googlePressed}
                 />

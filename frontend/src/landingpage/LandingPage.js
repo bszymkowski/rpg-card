@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {push} from 'react-router-redux';
 import {connect} from 'react-redux'
 import {PropTypes} from 'prop-types';
@@ -14,15 +14,12 @@ class LandingPage extends React.Component{
 
     render() {
         const {isAuthenticated} = this.props;
-        console.log(isAuthenticated);
         return (
             <div>
                 {!isAuthenticated ?
                 <LoginView/> : "OHAI"}
             </div>)
     }
-
-
 }
 
 LandingPage.propTypes = {

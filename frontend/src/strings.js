@@ -1,6 +1,8 @@
 export const strings = {
     login: {
-        google: "Login with Google"
+        with: {
+            google: "Zaloguj się z Google"
+        },
     },
     header: {
         title: "Wampir: Maskarada",
