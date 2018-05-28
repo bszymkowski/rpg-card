@@ -5,7 +5,7 @@ import {PropTypes} from 'prop-types';
 import {getLoggedInState} from "./loginActions";
 import LoginView from "./LoginView";
 
-class LandingPage extends React.Component{
+class LandingPage extends React.Component {
 
     componentWillMount() {
         const {checkLogin} = this.props;
@@ -17,7 +17,8 @@ class LandingPage extends React.Component{
         return (
             <div>
                 {!isAuthenticated ?
-                <LoginView/> : "OHAI"}
+                    <LoginView/> :
+                    "OHAI"}
             </div>)
     }
 }
@@ -27,7 +28,7 @@ LandingPage.propTypes = {
 };
 
 const mapStateToProps = state => {
-    const isAuthenticated = state.auth.isAuthenticated;
+    const isAuthenticated = !!state.auth.user;
     return {isAuthenticated};
 };
 
