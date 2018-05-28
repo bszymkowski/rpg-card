@@ -2,6 +2,7 @@ package com.szymkowski.rpg.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
@@ -39,6 +40,9 @@ class WebSecurity extends WebSecurityConfigurerAdapter {
     private final OAuth2ClientContext oauth2ClientContext;
     private final GooglePrincipalExtractor googlePrincipalExtractor;
 
+    @Value("${application.frontend.path}")
+    private String frontendApplicationPath;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -49,8 +53,14 @@ class WebSecurity extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and().logout().permitAll()
-                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and().csrf().csrfTokenRepository(cookieCsrfTokenRepository())
                 .and().addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+    }
+
+    private CookieCsrfTokenRepository cookieCsrfTokenRepository() {
+        CookieCsrfTokenRepository cookieCsrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        cookieCsrfTokenRepository.setCookiePath(frontendApplicationPath);
+        return cookieCsrfTokenRepository;
     }
 
     @Bean

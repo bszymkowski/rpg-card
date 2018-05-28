@@ -1,22 +1,15 @@
-import {LOGGED_IN_REQUEST, LOGIN_INFO_RECEIVED} from "./loginActions";
+import {LOGIN_SUCCESS, LOGIN_FAIL} from "./loginActions";
 
 
-export function auth(state = {
-    isFetching: false,
-    isAuthenticated: false
-}, action) {
+export function auth(state = {}, action) {
     switch (action.type) {
-        case LOGGED_IN_REQUEST:
+        case LOGIN_SUCCESS:
             return Object.assign({}, state, {
-                isFetching: true,
-                isAuthenticated: false,
-                user: action.creds
-            });
-        case LOGIN_INFO_RECEIVED:
-            return Object.assign({}, state, {
-                isFetching: false,
-                isAuthenticated: action.isAuthenticated,
                 user: action.user
+            });
+        case LOGIN_FAIL:
+            return Object.assign({}, state, {
+                user: null
             });
         default:
             return state

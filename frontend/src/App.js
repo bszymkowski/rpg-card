@@ -11,7 +11,6 @@ import {Provider} from 'react-redux';
 import NavBar from "./navbar/NavBar";
 
 function App() {
-
     return (
         <Provider store={store}>
             <ConnectedRouter history={history}>
@@ -25,7 +24,6 @@ function App() {
             </ConnectedRouter>
         </Provider>
     );
-
 }
 
 export default App;

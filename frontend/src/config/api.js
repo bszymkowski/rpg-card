@@ -1,6 +1,7 @@
 export const api = {
-  login : {
-      google: "/api/login/google"
-  },
-  user : "/api/user"
+    login: {
+        google: "/api/login/google"
+    },
+    logout: "api/logout",
+    user: "/api/user"
 };

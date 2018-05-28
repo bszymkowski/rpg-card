@@ -1,13 +1,17 @@
 import React from 'react';
 import {connect} from "react-redux";
+import {getLoggedInState, logout} from "../landingpage/loginActions";
 
 
-function NavBar({user}) {
-    return(
+function NavBar({user, logout}) {
+    return !! user ?(
         <div>
-            {user ? "Witaj, " + user.name : ""}
+            <span>{user ? "Witaj, " + user.name : ""}</span>
+            <span>
+                <button onClick={logout}>Logout</button>
+            </span>
         </div>
-    )
+    ) : (<div/>);
 }
 
 const mapStateToProps = state => {
@@ -16,7 +20,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToprops = dispatch => {
-    return {}
+    return {
+        logout: () => {
+            dispatch(logout())
+        }
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToprops)(NavBar)
