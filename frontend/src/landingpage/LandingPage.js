@@ -1,5 +1,4 @@
 import React from 'react';
-import {push} from 'react-router-redux';
 import {connect} from 'react-redux'
 import {PropTypes} from 'prop-types';
 import {getLoggedInState} from "./loginActions";
