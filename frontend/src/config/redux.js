@@ -5,18 +5,33 @@ import {routerReducer, routerMiddleware, push} from 'react-router-redux'
 import {auth} from "../landingpage/loginReducer";
 import createHistory from "history/createBrowserHistory";
 import {request} from "../request/request";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
 
 export const history = createHistory();
 
 const rtMiddleware = routerMiddleware(history);
 
-export const store = createStore(combineReducers({
-        characterSheet,
-        auth,
-        request,
-        router: routerReducer
-    }),
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+
+const rootReducer = combineReducers({
+    characterSheet,
+    auth,
+    request,
+    router: routerReducer
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+
+export const store = createStore(persistedReducer,
     applyMiddleware(
         thunkMiddleware,
         rtMiddleware
     ));
+
+export const persistor = persistStore(store);
+

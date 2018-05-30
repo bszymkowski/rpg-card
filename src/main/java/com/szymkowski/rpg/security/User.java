@@ -15,6 +15,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Email
     @Column
     @Basic
@@ -23,6 +24,7 @@ public class User implements Serializable {
     @Column
     @Basic
     private String name;
+
     @Column
     @Basic
     private String surname;
