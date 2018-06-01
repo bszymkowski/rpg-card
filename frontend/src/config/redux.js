@@ -6,7 +6,8 @@ import {auth} from "../landingpage/loginReducer";
 import createHistory from "history/createBrowserHistory";
 import {request} from "../request/request";
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
+import storage from 'redux-persist/lib/storage'
+import {profile} from "../userprofile/profileReducer"; // defaults to localStorage for web and AsyncStorage for react-native
 
 export const history = createHistory();
 
@@ -20,6 +21,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     characterSheet,
     auth,
+    profile,
     request,
     router: routerReducer
 });
