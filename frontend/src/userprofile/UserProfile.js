@@ -3,15 +3,19 @@ import {connect} from "react-redux";
 import {Button, Col, Container, Input, Row} from "reactstrap";
 import strings from "./strings"
 import {changeName} from "./userProfileActions";
+import deepEquals from "deep-equal"
 
-const UserProfile = ({user, changeName}) => {
+const UserProfile = ({profile, base, changeName}) => {
+
+    console.log("profile", profile)
+
     return (
         <Container>
             <Row>
                 <Col>
-                    {user.dirty ? "dsfa" : "fdsaf"}
+                    {deepEquals(profile, base) ? "unchanged" : "changed" }
                     <img
-                        src={user.pictureURI}
+                        src={profile.pictureURI}
                         alt=""
                     />
                 </Col>
@@ -24,7 +28,7 @@ const UserProfile = ({user, changeName}) => {
                             </div>
                             <Input
                                 type="text"
-                                value={user.name || ""}
+                                value={profile.name || ""}
                                 onChange={e => changeName(e.target.value)}
                             />
                         </Row>
@@ -35,7 +39,7 @@ const UserProfile = ({user, changeName}) => {
                             </div>
                             <Input
                                 type="text"
-                                value={user.surname || ""}
+                                value={profile.surname || ""}
                                 onChange={e => console.log(e)}
                             />
                         </Row>
@@ -47,7 +51,7 @@ const UserProfile = ({user, changeName}) => {
                             <Input
                                 disabled
                                 type="text"
-                                value={user.email || ""}
+                                value={profile.email || ""}
                                 onChange={e => console.log(e)}
                             />
                         </Row>
@@ -62,7 +66,7 @@ const UserProfile = ({user, changeName}) => {
                             <Input
                                 disabled
                                 type="text"
-                                value={user.pictureURI || ""}
+                                value={profile.pictureURI || ""}
                                 onChange={e => console.log(e)}
                             />
 
@@ -73,23 +77,20 @@ const UserProfile = ({user, changeName}) => {
                             >{strings.changeProfilePicture}</Button>
 
                         </Row>
-
-
                     </Container>
                     <div>
                     </div>
                 </Col>
             </Row>
-
         </Container>
     )
 };
 
 
 const mapStateToProps = state => {
-    const user = state.profile;
-    console.log(state);
-    return {user};
+    const profile = state.profile.current;
+    const base = state.profile.base;
+    return {profile, base};
 };
 
 const mapDispatchToProps = dispatch => {

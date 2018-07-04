@@ -61,7 +61,7 @@ const mapDispatchToprops = dispatch => {
             dispatch(logout())
         },
         userProfile: () => {
-            dispatch(push("/user"));
+            dispatch(push("/profile"));
         }
     }
 };

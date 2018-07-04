@@ -4,6 +4,7 @@ import axios from 'axios';
 export const characterSheet = (state = {header: {}}, action) => {
     switch (action.type) {
         case VALUE_CHANGE:
+            //todo bsz no. Just no.
             return deepAssign({}, state, action.change);
         case LOAD_SHEET:
             return Object.assign({}, state, {isLoading: true});

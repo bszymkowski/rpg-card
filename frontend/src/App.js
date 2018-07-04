@@ -21,7 +21,7 @@ function App() {
                         <NavBar/>
                         <Switch>
                             <Route exact path="/" component={LandingPage}/>
-                            <Route exact path="/user" component={UserProfile}/>
+                            <Route exact path="/profile" component={UserProfile}/>
                             <Route exact path="/sheet/:characterId" component={CharacterSheet}/>
                         </Switch>
                     </div>
