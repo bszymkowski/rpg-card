@@ -8,3 +8,12 @@ export const changeName = newName => dispatch => {
         }
     })
 };
+
+export const changeSurname = newSurname => dispatch => {
+    dispatch({
+        type: PROFILE_CHANGE,
+        payload: {
+            surname: newSurname
+        }
+    })
+};

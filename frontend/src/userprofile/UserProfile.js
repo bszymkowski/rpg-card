@@ -2,12 +2,10 @@ import React from 'react'
 import {connect} from "react-redux";
 import {Button, Col, Container, Input, Row} from "reactstrap";
 import strings from "./strings"
-import {changeName} from "./userProfileActions";
+import {changeName, changeSurname} from "./userProfileActions";
 import deepEquals from "deep-equal"
 
-const UserProfile = ({profile, base, changeName}) => {
-
-    console.log("profile", profile)
+const UserProfile = ({profile, base, changeName, changeSurname}) => {
 
     return (
         <Container>
@@ -40,7 +38,7 @@ const UserProfile = ({profile, base, changeName}) => {
                             <Input
                                 type="text"
                                 value={profile.surname || ""}
-                                onChange={e => console.log(e)}
+                                onChange={e => changeSurname(e.target.value)}
                             />
                         </Row>
                         <Row>
@@ -95,7 +93,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeName: newName => dispatch(changeName(newName))
+        changeName: newName => dispatch(changeName(newName)),
+        changeSurname : newSurname => dispatch(changeSurname(newSurname))
     }
 };
 
