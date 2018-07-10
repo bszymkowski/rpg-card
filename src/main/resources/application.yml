@@ -9,10 +9,13 @@ application:
     path: "/"
 
 oauth2:
-  redirect_uri: "http://localhost:8000/"
+  #todo bsz
+  redirect_uri: "https://arcane-sea-76966.herokuapp.com/"
   google:
     client:
+      #todo bsz
       clientId: 162144903306-oi3udlmnst530mk7o9djc2rfp4ippvuc.apps.googleusercontent.com
+      #todo bsz
       clientSecret: vKV7WtEFUUloxBa5BMZ_vzLv
       accessTokenUri: https://www.googleapis.com/oauth2/v4/token
       userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
