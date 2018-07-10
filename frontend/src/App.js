@@ -1,45 +1,29 @@
-import React, {Component} from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import React from 'react';
+
+import {Route, Switch} from 'react-router'
+import {ConnectedRouter} from 'react-router-redux'
+
 import './App.css';
-import CardHeader from "./card/CardHeader";
+import CharacterSheet from "./characterSheet/CharacterSheet";
+import LandingPage from "./landingpage/LandingPage"
+import {store, history} from "./config/redux";
+import {Provider} from 'react-redux';
+import NavBar from "./navbar/NavBar";
 
-class App extends Component {
-
-    state = {
-        header : {}
-    };
-
-    onChange = (change) => {
-        const newState = Object.assign({}, this.state, change);
-        this.setState(newState);
-    };
-
-
-    componentDidMount() {
-        fetch('api/character')
-            .then(
-                (ok) => {return ok.json()}
-            )
-            .then(data => {
-                const newState = Object.assign({}, this.state, data);
-                this.setState(newState);
-            });
-    }
-
-    render() {
-        return (
-            <Container>
-                <Row>
-                    <Col>
-                        <header className="text-center">
-                            <h1>Wampir: Maskarada</h1>
-                        </header>
-                    </Col>
-                </Row >
-                <CardHeader header={this.state.header} onChange={this.onChange} />
-            </Container>
-        );
-    }
+function App() {
+    return (
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
+                <div>
+                    <NavBar/>
+                    <Switch>
+                        <Route exact path="/" component={LandingPage}/>
+                        <Route exact path="/sheet/:characterId" component={CharacterSheet}/>
+                    </Switch>
+                </div>
+            </ConnectedRouter>
+        </Provider>
+    );
 }
 
 export default App;

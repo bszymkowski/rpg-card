@@ -1,0 +1,2 @@
+oauth2:
+  redirect_uri: "http://localhost:8000/"
