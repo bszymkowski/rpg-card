@@ -2,15 +2,15 @@ package com.szymkowski.rpg.character;
 
 import com.szymkowski.rpg.character.dto.CharacterDTO;
 import com.szymkowski.rpg.character.dto.HeaderDTO;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/character")
+@RequestMapping("/character")
 class CharacterResource {
 
-    @RequestMapping(
-            method = RequestMethod.GET
-    )
+    @GetMapping
     public CharacterDTO getCharacterInfo(@RequestParam Long id) {
         HeaderDTO header = new HeaderDTO(
                 "Stefan Elefan",
@@ -23,6 +23,6 @@ class CharacterResource {
                 "Rolnik",
                 "Ochronka");
         return new CharacterDTO(header);
-
     }
+
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import LabelAttribute from './LabelAttribute';
-import {strings} from './strings';
+import {strings} from './../strings';
 import PropTypes from 'prop-types';
 
 const labels = strings.header;
