@@ -4,8 +4,6 @@ server:
   servlet:
     context-path: /api
 
-
-
 application:
   frontend:
     path: "/"
