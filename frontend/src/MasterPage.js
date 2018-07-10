@@ -25,13 +25,15 @@ class MasterPage extends React.Component {
         return (
             <ConnectedRouter history={history}>
                 <div>
-                    <NavBar/>
                     {isAuthenticated ?
+                        <span>
+                        <NavBar/>
                         <Switch>
                             <Route exact path="/" component={LandingPage}/>
                             <Route exact path="/profile" component={UserProfile}/>
                             <Route exact path="/sheet/:characterId" component={CharacterSheet}/>
                         </Switch>
+                            </span>
                         :
                         <LoginView/>}
                 </div>

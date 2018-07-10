@@ -17,7 +17,7 @@ import UserBadge from "./UserBadge";
 
 
 function NavBar({user, logout, userProfile}) {
-    return !!user ? (
+    return (
             <Navbar color="light" light expand="md">
                 <NavbarBrand>
                     <span>
@@ -45,9 +45,7 @@ function NavBar({user, logout, userProfile}) {
                     </UncontrolledDropdown>
                 </Nav>
             </Navbar>
-        )
-        : (<div/>);
-
+        );
 }
 
 const mapStateToProps = state => {
