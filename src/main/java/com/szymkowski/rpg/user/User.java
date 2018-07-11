@@ -1,4 +1,4 @@
-package com.szymkowski.rpg.security;
+package com.szymkowski.rpg.user;
 
 import lombok.Data;
 

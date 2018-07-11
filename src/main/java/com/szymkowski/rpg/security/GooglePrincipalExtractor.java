@@ -1,5 +1,7 @@
 package com.szymkowski.rpg.security;
 
+import com.szymkowski.rpg.user.User;
+import com.szymkowski.rpg.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;

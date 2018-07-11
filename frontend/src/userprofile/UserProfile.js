@@ -11,7 +11,8 @@ const UserProfile = ({profile, base, changeName, changeSurname}) => {
         <Container>
             <Row>
                 <Col>
-                    {deepEquals(profile, base) ? "unchanged" : "changed" }
+                    //todo bsz
+                    {deepEquals(profile, base) ? "" : <Button>Update Profile</Button>}
                     <img
                         src={profile.pictureURI}
                         alt=""
