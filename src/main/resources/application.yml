@@ -7,16 +7,14 @@ server:
 application:
   frontend:
     path: "/"
+    domain: ${UI_DOMAIN}
 
 oauth2:
-  #todo bsz
-  redirect_uri: "https://arcane-sea-76966.herokuapp.com/"
+  redirect_uri: ${REDIRECT}
   google:
     client:
-      #todo bsz
       clientId: 162144903306-oi3udlmnst530mk7o9djc2rfp4ippvuc.apps.googleusercontent.com
-      #todo bsz
-      clientSecret: vKV7WtEFUUloxBa5BMZ_vzLv
+      clientSecret: ${GOOGLE_SECRET}
       accessTokenUri: https://www.googleapis.com/oauth2/v4/token
       userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
       tokenName: oauth_token
