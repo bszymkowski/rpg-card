@@ -1,8 +1,8 @@
 
 server:
   port: ${PORT:8080}
-  servlet:
-    context-path: /api
+#  servlet:
+#    context-path: /api
 
 application:
   frontend:
@@ -10,7 +10,7 @@ application:
 
 oauth2:
   #todo bsz
-  redirect_uri: "https://arcane-sea-76966.herokuapp.com/"
+  redirect_uri: ${REDIRECT}
   google:
     client:
       #todo bsz

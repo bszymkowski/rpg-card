@@ -44,6 +44,14 @@ class WebSecurity extends WebSecurityConfigurerAdapter {
     private String frontendApplicationPath;
 
     @Override
+    public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
+        super.configure(web);
+        web.ignoring()
+                .antMatchers("/**/*.{js,html,css}");
+
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .antMatcher("/**")
