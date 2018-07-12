@@ -25,14 +25,6 @@ configurations {
 	providedRuntime
 }
 
-task serveFrontend(type: NodeTask) {
-	script = file('frontend/scripts/start.js')
-}
-
-task buildFrontend(type: NodeTask) {
-	script = file('frontend/scripts/build.js')
-}
-
 task stage() {
 	dependsOn clean, bootWar
 }
@@ -48,14 +40,7 @@ task copyToLib(type: Copy) {
 stage.dependsOn(copyToLib)
 
 
-bootWar.dependsOn buildFrontend
 bootWar.mustRunAfter clean
-
-bootWar {
-	from('build/resources/webapp') {
-		include '/**/*.*'
-	}
-}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
