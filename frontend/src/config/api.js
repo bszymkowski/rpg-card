@@ -3,5 +3,5 @@ export const api = {
         google: "/api/login/google"
     },
     logout: "api/logout",
-    user: "/api/user"
+    user: "/api/profile"
 };

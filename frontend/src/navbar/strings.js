@@ -1,5 +1,6 @@
 const strings = {
-    logout: "Wyloguj się"
+    logout: "Wyloguj się",
+    userProfile: "Profil"
 };
 
 export default strings;

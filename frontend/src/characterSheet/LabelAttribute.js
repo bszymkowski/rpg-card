@@ -6,7 +6,7 @@ const LabelAttribute = ({label, value, valueChange}) => (
     <Container>
         <Row>
             <Col xl={{size: 4}} lg={{size: 4}}>
-                <strong>{label}: </strong>
+                <strong>{label} </strong>
             </Col>
             <Col xl={{size: 8}} lg={{size: 8}}>
                 <Input type="textArea"
