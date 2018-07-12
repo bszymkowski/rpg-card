@@ -12,11 +12,12 @@ import {
     DropdownItem
 } from 'reactstrap';
 import {logout} from "../landingpage/loginActions";
+import {push} from "react-router-redux"
 import UserBadge from "./UserBadge";
 
 
-function NavBar({user, logout}) {
-    return !!user ? (
+function NavBar({user, logout, userProfile}) {
+    return (
             <Navbar color="light" light expand="md">
                 <NavbarBrand>
                     <span>
@@ -29,6 +30,11 @@ function NavBar({user, logout}) {
                             <UserBadge user={user}/>
                         </DropdownToggle>
                         <DropdownMenu right>
+                            <DropdownItem onClick={userProfile}>
+                                <div>
+                                    {strings.userProfile}
+                                </div>
+                            </DropdownItem>
                             <DropdownItem divider/>
                             <DropdownItem onClick={logout}>
                                 <div>
@@ -39,9 +45,7 @@ function NavBar({user, logout}) {
                     </UncontrolledDropdown>
                 </Nav>
             </Navbar>
-        )
-        : (<div/>);
-
+        );
 }
 
 const mapStateToProps = state => {
@@ -53,6 +57,9 @@ const mapDispatchToprops = dispatch => {
     return {
         logout: () => {
             dispatch(logout())
+        },
+        userProfile: () => {
+            dispatch(push("/profile"));
         }
     }
 };
