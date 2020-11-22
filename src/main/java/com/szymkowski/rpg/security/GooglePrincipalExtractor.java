@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 
 @Component
-@RequiredArgsConstructor(onConstructor = @_(@Autowired))
+@RequiredArgsConstructor
 class GooglePrincipalExtractor implements PrincipalExtractor {
 
     private static final String PICURE_URI_KEY = "picture";
