@@ -33,7 +33,7 @@ import java.util.Map;
 
 @EnableWebSecurity
 @EnableOAuth2Client
-@RequiredArgsConstructor(onConstructor = @_(@Autowired))
+@RequiredArgsConstructor
 class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
@@ -42,14 +42,6 @@ class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Value("${application.frontend.path}")
     private String frontendApplicationPath;
-
-    @Override
-    public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
-        super.configure(web);
-        web.ignoring()
-                .antMatchers("/**/*.{js,html,css}");
-
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
