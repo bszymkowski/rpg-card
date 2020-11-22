@@ -4,6 +4,12 @@ server:
 #  servlet:
 #    context-path: /api
 
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
 application:
   frontend:
     path: ${UI_DOMAIN}
