@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoT
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -80,21 +81,21 @@ class WebSecurity extends WebSecurityConfigurerAdapter {
             OAuth2ClientContextFilter filter) {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(filter);
-        registration.setOrder(-100);
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
         return registration;
     }
 
 
     private Filter ssoFilter() {
-        OAuth2ClientAuthenticationProcessingFilter googlefilter = new OAuth2ClientAuthenticationProcessingFilter("/login/google");
+        OAuth2ClientAuthenticationProcessingFilter googleFilter = new OAuth2ClientAuthenticationProcessingFilter("/login/google");
         OAuth2RestTemplate googleTemplate = new OAuth2RestTemplate(google(), oauth2ClientContext);
-        googlefilter.setRestTemplate(googleTemplate);
+        googleFilter.setRestTemplate(googleTemplate);
         UserInfoTokenServices tokenServices = new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId());
         tokenServices.setRestTemplate(googleTemplate);
         tokenServices.setPrincipalExtractor(googlePrincipalExtractor);
-        googlefilter.setTokenServices(tokenServices);
-        googlefilter.setAuthenticationSuccessHandler(oAuth2AuthenticationSuccessHandler);
-        return googlefilter;
+        googleFilter.setTokenServices(tokenServices);
+        googleFilter.setAuthenticationSuccessHandler(oAuth2AuthenticationSuccessHandler);
+        return googleFilter;
     }
 
 

@@ -1,6 +1,6 @@
-
-server:
+ server:
   port: ${PORT:8080}
+
 #  servlet:
 #    context-path: /api
 
