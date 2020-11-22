@@ -3,7 +3,6 @@ package com.szymkowski.rpg.user;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.Locale;
@@ -16,7 +15,6 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Email
     @Column
     @Basic
     private String email;
