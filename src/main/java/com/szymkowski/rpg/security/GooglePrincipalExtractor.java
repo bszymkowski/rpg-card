@@ -4,8 +4,6 @@ import com.szymkowski.rpg.user.User;
 import com.szymkowski.rpg.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -15,7 +13,7 @@ import java.util.Map;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-class GooglePrincipalExtractor implements PrincipalExtractor {
+class GooglePrincipalExtractor  {
 
     private static final String PICURE_URI_KEY = "picture";
     private static final String MAIL_KEY = "email";
@@ -26,7 +24,6 @@ class GooglePrincipalExtractor implements PrincipalExtractor {
     private final UserRepository userRepository;
 
 
-    @Override
     public Object extractPrincipal(Map<String, Object> map) {
         String email = (String) map.get(MAIL_KEY);
         log.info("Extracting principal from Google: {}", email);

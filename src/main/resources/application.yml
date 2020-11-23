@@ -1,41 +1,21 @@
 server:
   port: ${PORT:8080}
 
-#  servlet:
-#    context-path: /api
-
 logging:
   level:
     org:
       springframework:
         security: DEBUG
 
-application:
-  frontend:
-    path: ${UI_DOMAIN}
-
 oauth2:
-  #todo bsz
   redirect_uri: ${REDIRECT}
-  google:
-    client:
-      clientId: ${GOOGLE_ID}
-      clientSecret: ${GOOGLE_SECRET}
-      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
-      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
-      tokenName: oauth_token
-      authenticationScheme: query
-      clientAuthenticationScheme: form
-      scope: openid profile email
-    resource:
-      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
 
-
-#spring:
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: "162144903306-oi3udlmnst530mk7o9djc2rfp4ippvuc.apps.googleusercontent.com"
-#            client-secret: "vKV7WtEFUUloxBa5BMZ_vzLv"
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_ID}
+            client-secret: ${GOOGLE_SECRET}
+            scope: openid,profile,email
