@@ -4,6 +4,7 @@ import com.szymkowski.rpg.user.User;
 import com.szymkowski.rpg.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -13,7 +14,7 @@ import java.util.Map;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-class GooglePrincipalExtractor  {
+public class GooglePrincipalExtractor  {
 
     private static final String PICURE_URI_KEY = "picture";
     private static final String MAIL_KEY = "email";
@@ -23,8 +24,12 @@ class GooglePrincipalExtractor  {
 
     private final UserRepository userRepository;
 
+    public User getByName(DefaultOidcUser defaultOidcUser) {
+        String eMail = (String) defaultOidcUser.getAttributes().get(MAIL_KEY);
+        return userRepository.findDistinctByEmail(eMail);
+    }
 
-    public Object extractPrincipal(Map<String, Object> map) {
+    public User extractPrincipal(Map<String, Object> map) {
         String email = (String) map.get(MAIL_KEY);
         log.info("Extracting principal from Google: {}", email);
         User user = userRepository.findDistinctByEmail(email);
