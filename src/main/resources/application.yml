@@ -5,7 +5,7 @@ logging:
   level:
     org:
       springframework:
-        security: DEBUG
+        security: TRACE
 
 oauth2:
   redirect_uri: ${REDIRECT}
